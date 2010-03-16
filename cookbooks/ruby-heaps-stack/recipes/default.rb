@@ -15,27 +15,27 @@ execute "unarchive ruby" do
 end
 
 execute "autotools" do
-  command "cd /usr/src/matzruby;autoreconf"
+  command "cd /usr/src/ice799-matzruby*;autoconf"
 end
 
 execute "libtoolize" do
-  command "cd /usr/src/matzruby;libtoolize --force"
+  command "cd /usr/src/ice799-matzruby*;libtoolize --force"
 end
 
 execute "autotools round 2" do
-  command "cd /usr/src/matzruby;autoconf"
+  command "cd /usr/src/ice799-matzruby*;autoconf"
 end
 
 execute "configure" do
-  command "cd /usr/src/matzruby;./configure --prefix=/usr --sysconfdir=/etc --enable-pthread --enable-shared"
+  command "cd /usr/src/ice799-matzruby*;./configure --prefix=/usr --sysconfdir=/etc --enable-pthread --enable-shared"
 end
 
 execute "make" do
-  command "cd /usr/src/matzruby;make -j1"
+  command "cd /usr/src/ice799-matzruby*;make -j1"
 end
 
 execute "make install" do
-  command "cd /usr/src/matzruby;make install"
+  command "cd /usr/src/ice799-matzruby*;make install"
 end
 
 remote_file "/usr/src/rubygems.tar.gz" do
