@@ -6,6 +6,10 @@
 
 if ['solo', 'util'].include?(node[:instance_role])
 
+  # CONFIGURATING SETTINGS HERE! DO NOT PUSH THESE VARIABLES UP TO GITHUB.
+  # alternative to using this cookbook, use the default cookbook and setup 
+  # exim.conf on your EBS and then be happy.
+
   smtp_host = "my.external.mailserver"
   my_hostname = "my.domain.com"
   smtp_username = "username"

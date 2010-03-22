@@ -4,7 +4,7 @@
 #
 # Configuration settings
 
-#if ['solo', 'util'].include?(node[:instance_role])
+if ['solo', 'util'].include?(node[:instance_role])
 
   package "mail-mta/ssmtp" do
     action :remove
@@ -41,22 +41,22 @@
   end
 
   execute "remove /etc/exim" do
-    command "rm -rf /etc/exim"
-    only_if { FileTest.driectory("/data/exim") && FileTest.exists?("/data/exim/exim.conf") }
+    command "rm -rf /etc/exim && sync"
+    only_if { FileTest.exists?("/data/exim/exim.conf") }
   end
 
-  link "/data/exim" do
-    to "/etc/exim"
+  execute "add_symlink" do
+    command "cd /;ln -sfv /data/exim /etc/exim && sync"
   end
 
-package "mail-client/mailx" do
-  action :install
-end
+  package "mail-client/mailx" do
+    action :install
+  end
 
-execute "ensure-exim-is-running" do
-  command %Q{
-    /etc/init.d/exim start
-  }
-  not_if "pgrep exim"
+  execute "ensure-exim-is-running" do
+    command %Q{
+     /etc/init.d/exim start
+    }
+    not_if "pgrep exim"
+  end
 end
-#end
