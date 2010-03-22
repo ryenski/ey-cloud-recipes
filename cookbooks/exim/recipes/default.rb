@@ -4,51 +4,50 @@
 #
 # Configuration settings
 
-if ['solo', 'util'].include?(node[:instance_role])
+#if ['solo', 'util'].include?(node[:instance_role])
 
-  smtp_host = "my.external.mailserver"
-  my_hostname = "my.domain.com"
-  smtp_username = "username"
-  smtp_password "password"
+  package "mail-mta/ssmtp" do
+    action :remove
+    ignore_failure true
+  end
 
-package "mail-mta/ssmtp" do
-  action :remove
-  ignore_failure true
-end
+  package "mail-mta/exim" do
+    action :install
+  end
 
-package "mail-mta/exim" do
-  action :install
-end
+  directory "/data/exim" do
+    action :create
+    owner "root"
+    group "root"
+    mode "0755"
+  end
 
-template "/etc/exim/exim.conf" do
-  source "exim.conf.erb"
-  mode 0644
-  owner "root"
-  group "root"
-  backup 0
-  variables(
-    :smtp_host => smtp_host,
-    :smtp_username => smtp_username,
-    :smtp_password => smtp_password,
-    :my_hostname => my_hostname
-  )
-end
+  execute "copy dist-config over to shared" do
+    command "cp /etc/exim/exim.conf.dist /data/exim/exim.conf"
+    not_if { FileTest.exists?("/data/exim/exim.conf") }
+    only_if { FileTest.directory?("/data/exim") }
+  end
 
-directory "/data/exim" do
-  action :create
-  owner "root"
-  group "root"
-  mode "0755"
-end
+  execute "copy system_filter.exim" do
+    command "cp /etc/exim/system_filter.exim /data/exim/system_filter.exim"
+    not_if { FileTest.exists?("/data/exim/system_filter.exim") }
+    only_if { FileTest.directory?("/data/exim") }
+  end
 
-execute "touch_passwd" do
-  command "touch /data/exim/passwd"
-  not_if { FileTest.exists?("/data/exim/passwd") }
-end
+  execute "copy auth_conf.sub" do
+    command "cp /etc/exim/auth_conf.sub /data/exim/auth_conf.sub"
+    not_if { FileTest.exists?("/data/exim/auth_conf.sub") }
+    only_if { FileTest.directory?("/data/exim") }
+  end
 
-link "/data/exim/passwd" do
-  to "/etc/exim/passwd"
-end
+  execute "remove /etc/exim" do
+    command "rm -rf /etc/exim"
+    only_if { FileTest.driectory("/data/exim") && FileTest.exists?("/data/exim/exim.conf") }
+  end
+
+  link "/data/exim" do
+    to "/etc/exim"
+  end
 
 package "mail-client/mailx" do
   action :install
@@ -60,4 +59,4 @@ execute "ensure-exim-is-running" do
   }
   not_if "pgrep exim"
 end
-end
+#end
