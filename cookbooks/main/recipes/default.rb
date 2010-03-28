@@ -39,3 +39,5 @@
 #uncomment to run the ruby-heaps-stack recipe
 #require_recipe "ruby-heaps-stack"
 
+#uncomment to run the riak recipe
+#require_recipe "riak"

@@ -14,10 +14,6 @@ Add 'require_recipe "riak"' in cookbooks/main/recipes/default.rb
 
 Riak's cookie is configured as the same password as MySQL, there is no automation for it to join a ring at this time.
 
-= LASTLY:
-
-There is no support to join a ring or any of that at this time.
-
 = WARRANTY:
 
 There is no Warranty nor support for Riak by Engine Yard. and me.  It should work as is, if there is any bugs found send a pull request.
