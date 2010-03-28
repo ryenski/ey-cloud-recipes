@@ -32,9 +32,10 @@
 
 #uncomment to run the sunspot recipe
 # require_recipe "sunspot"
-#
+
 #uncomment to run the exim recipe
 #require_recipe "exim"
 
-#uncomment to run the exim::auth recipe
-#require_recipe "exim::auth"
+#uncomment to run the ruby-heaps-stack recipe
+#require_recipe "ruby-heaps-stack"
+
