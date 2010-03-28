@@ -6,6 +6,8 @@ This Cookbook will _upgrade_ Erlang R13B04 into /usr and overwrite the old erlan
 
 There is no support at this time for Riak on the cloud officially, which means if you use this cookbook.  Engine Yard does not currently at this time offer *any* kind of support for Riak.
 
+Additionally you will need to open the security group to allow remote connection to the ports in question, in a secure manner.  
+
 = USAGE:
 
 Add 'require_recipe "riak"' in cookbooks/main/recipes/default.rb
