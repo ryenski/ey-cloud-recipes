@@ -21,11 +21,11 @@ execute "configure erlang" do
 end
 
 execute "make erlang" do
-  command "cd /usr/src/otp_src_R13B04;make -j2"
+  command "cd /usr/src/otp_src_R13B04;make -j1"
 end
 
 execute "make install" do
-  command "cd /usr/src/otp_src_R13B04;make install -j2"
+  command "cd /usr/src/otp_src_R13B04;make install -j1"
 end
 
 
