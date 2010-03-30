@@ -10,6 +10,8 @@ This Cookbook will create /data/exim on your EBS and then copy the Exim configur
 
 = USAGE:
 
+== Method 1:
+
 Copy this folder into your ey-cloud-recipes repo
 
 Modify main/recipes/default.rb to require_recipe "exim"
@@ -17,3 +19,17 @@ Modify main/recipes/default.rb to require_recipe "exim"
 Commit to your ey-cloud recipes git repo, push it up and run 
 
 Now run ey-recipes -d <ENV>
+
+== Method 2:
+
+Modify main/recipes/default.rb like so,
+
+exim_auth "gmail" do
+  smtp_host "smtp.gmail.com"
+  username "username"
+  password "bob"
+  my_hostname "example.com"
+end
+
+Then commit and ey-recipes -D <ENV>
+
