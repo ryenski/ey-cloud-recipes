@@ -24,6 +24,11 @@ package "mail-mta/exim" do
   action :install
 end
 
+execute  "symlink ssmtp" do
+  command "ln -sfv /usr/sbin/exim /usr/sbin/ssmtp"
+  not_if { FileTest.exists?("/usr/sbin/ssmtp") }
+end
+
 directory "/data/exim" do
   action :create
   owner "root"
