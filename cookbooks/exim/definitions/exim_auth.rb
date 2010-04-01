@@ -5,7 +5,7 @@
 
 define :exim_auth, :my_hostname => nil, :smtp_host => nil, :username => nil, :password => nil do
 
-  include_recipe "exim::default"
+  include_recipe "exim::auth"
 
   template "/data/exim/exim.conf" do
     cookbook "exim"
