@@ -41,3 +41,25 @@
 
 #uncomment to run the riak recipe
 #require_recipe "riak"
+#exim_instance = if node.engineyard.environment.solo_cluster?
+#                  node.engineyard.environment.instances.first
+#                else
+#                  node.engineyard.environment.utility_instances.find {|x| x.name == "exim"}
+#                end
+#
+#if node.engineyard == exim_instance
+#  exim_auth "auth" do
+#    my_hostname "example.com"
+#    smtp_host "smtp.gmail.com:587"
+#    username 'username'
+#    password 'password'
+#  end
+#else
+#  Chef::Log.info "Util server is #{exim_instance.id}"
+#  ssmtp_conf "default" do
+#    mailhub exim_instance.public_hostname
+#    rewrite_domain "hostname.com"
+#    from_line_override true
+#  end
+#end
+
