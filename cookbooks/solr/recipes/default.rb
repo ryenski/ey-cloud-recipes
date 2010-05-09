@@ -3,7 +3,7 @@
 # Recipe:: default
 #
 # We specify what version we want below.
-solr_desiredversion = 1.3
+solr_desiredversion = 1.4
 if ['solo', 'util'].include?(node[:instance_role])
   case solr_desiredversion
   when "1.3"

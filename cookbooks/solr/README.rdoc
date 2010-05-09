@@ -16,4 +16,5 @@ This sets up Solr in /data/solr, and then sets up /engineyard/bin/solr and a mon
 = CREDITS:
 
 Scott M. Likens (damm)
+
 Brian Bommarito http://github.com/bommaritobrianmatthew (For his Sunspot recipe which without... I might not have given a darn otherwise)
