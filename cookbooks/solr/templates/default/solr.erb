@@ -22,7 +22,7 @@ cd /data/solr
     start)
       echo "Starting the Solr server."
       if [ -f /var/run/solr/solr.pid ]; then
-PID=`cat /var/run/solr/solr..pid`
+PID=`cat /var/run/solr/solr.pid`
         if [ ! -d /proc/$PID ]; then
         rm -f /var/run/solr/solr.pid
         fi
