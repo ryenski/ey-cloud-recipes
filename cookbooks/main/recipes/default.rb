@@ -39,10 +39,16 @@
 #uncomment to run the ruby-heaps-stack recipe
 #require_recipe "ruby-heaps-stack"
 
+#uncomment to run the solr recipe
 #require_recipe "solr"
+
+#uncomment to run the resque recipe
+#require_recipe "resque"
 
 #uncomment to run the riak recipe
 #require_recipe "riak"
+
+#uncomment to run the exim recipe(s)
 #exim_instance = if node.engineyard.environment.solo_cluster?
 #                  node.engineyard.environment.instances.first
 #                else
