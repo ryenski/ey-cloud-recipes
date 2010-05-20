@@ -2,4 +2,4 @@ check process resque-web
   with pidfile /var/run/engineyard/resque/<%= @app_name %>/resque-web.pid
   start program = "/engineyard/bin/resque-web <%= @app_name %> start"
   stop program = "/engineyard/bin/resque-web <%= @app_name %> stop"
-  group resque-web
+  group resque-web_<%= @app_name %>
