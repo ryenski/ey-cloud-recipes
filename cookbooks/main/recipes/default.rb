@@ -51,6 +51,9 @@
 #uncomment to run the riak recipe
 #require_recipe "riak"
 
+#uncomment to run the emacs recipe
+#require_recipe "emacs"
+
 #uncomment to run the exim recipe(s)
 #exim_instance = if node.engineyard.environment.solo_cluster?
 #                  node.engineyard.environment.instances.first
