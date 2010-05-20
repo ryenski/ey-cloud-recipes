@@ -45,6 +45,9 @@
 #uncomment to run the resque recipe
 #require_recipe "resque"
 
+#uncomment to run the resque-web recipe
+require_recipe "resque_web"
+
 #uncomment to run the riak recipe
 #require_recipe "riak"
 
