@@ -17,7 +17,7 @@ if ['solo', 'util'].include?(node[:instance_role])
     mode 0644 
     source "monitrc.conf.erb" 
     variables({ 
-      :app_name => app_name
+      :app_name => app
     })
     end
   end
