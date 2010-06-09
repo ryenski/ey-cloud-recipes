@@ -1,6 +1,6 @@
 # Setup database.yml
 dbtype = 'postgresql'
-
+if ['solo', 'app', 'app_master', 'util'].include?(node[:instance_role])
 node.engineyard.apps.each do |app|
 
   template "/data/#{app.name}/shared/config/database.yml" do
@@ -21,4 +21,5 @@ node.engineyard.apps.each do |app|
   execute "ln -sfv /data/#{app.name}/shared/config/database.yml /data/#{app.name}/current/config/database.yml" do
     action :run
   end
+end
 end
