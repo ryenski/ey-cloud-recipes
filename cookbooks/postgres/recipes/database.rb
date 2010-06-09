@@ -17,4 +17,8 @@ node.engineyard.apps.each do |app|
       :slaves => node.engineyard.environment.db_slaves_hostnames
     })
   end
+
+  execute "ln -sfv /data/#{app.name}/shared/config/database.yml /data/#{app.name}/current/config/database.yml" do
+    action :run
+  end
 end
