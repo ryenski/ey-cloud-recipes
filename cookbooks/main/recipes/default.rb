@@ -79,4 +79,4 @@
 #    from_line_override true
 #  end
 #end
-
+require_recipe "postgres::default"
