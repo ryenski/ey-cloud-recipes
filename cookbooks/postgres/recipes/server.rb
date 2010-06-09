@@ -4,10 +4,9 @@ postgres_root    = '/var/lib/postgresql'
 require_recipe 'postgres::server_setup'
 require_recipe 'postgres::server_configure'
 
-runlevel "postgresql-#{postgres_version}" do
-  action :add
+execute "rc-update add postgresql-#{postgres_version} default" do
+  action :run
 end
-
 execute "start-postgres" do
   command "/etc/init.d/postgresql-#{postgres_version} restart"
   action :run
