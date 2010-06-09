@@ -25,7 +25,7 @@ end
 
 # remove old MySQL backup... 
 if ['solo', 'db_master'].include?(node[:instance_role])
-  cron "eybackup" do
+  cron "mysql" do
     action :delete
   end
 end
