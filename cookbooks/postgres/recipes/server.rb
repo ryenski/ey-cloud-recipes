@@ -1,10 +1,6 @@
 postgres_version = '8.3'
 postgres_root    = '/var/lib/postgresql'
 
-ey_cloud_report "postgress install" do
-  message "processing postgresql #{postgres_version}"
-end
-
 require_recipe 'postgres::server_setup'
 require_recipe 'postgres::server_configure'
 
