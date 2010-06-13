@@ -1,5 +1,5 @@
 postgres_version = '8.3'
-postgres_root    = '/var/lib/postgresql'
+postgres_root    = '/db/postgresql'
 
 require_recipe 'postgres::server_setup'
 require_recipe 'postgres::server_configure'
@@ -7,6 +7,14 @@ require_recipe 'postgres::server_configure'
 execute "rc-update add postgresql-#{postgres_version} default" do
   action :run
 end
+
+remote_file "/etc/conf.d/postgresql-8.3" do
+  source "postgresql.conf"
+  owner "root"
+  group "root"
+  mode "0644"
+end
+
 execute "start-postgres" do
   command "/etc/init.d/postgresql-#{postgres_version} restart"
   action :run

@@ -1,5 +1,5 @@
 postgres_version = '8.3'
-postgres_root    = '/var/lib/postgresql'
+postgres_root    = '/db/postgresql'
 
 template "#{postgres_root}/#{postgres_version}/data/postgresql.conf" do
   source "postgresql.conf.erb"
