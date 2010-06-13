@@ -15,10 +15,12 @@ remote_file "/etc/conf.d/postgresql-8.3" do
   mode "0644"
 end
 
-execute "start-postgres" do
-  command "/etc/init.d/postgresql-#{postgres_version} restart"
-  action :run
-  not_if "/etc/init.d/postgresql-#{postgres_version} status | grep -q start"
+if ['solo', 'db_master'].include?(node[:instance_role])
+  execute "start-postgres" do
+    command "/etc/init.d/postgresql-#{postgres_version} restart"
+      action :run
+    not_if "/etc/init.d/postgresql-#{postgres_version} status | grep -q start"
+  end
 end
 
 username = node.engineyard.ssh_username
