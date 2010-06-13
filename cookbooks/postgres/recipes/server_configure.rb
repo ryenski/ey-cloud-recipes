@@ -91,4 +91,3 @@ end
 user "postgres" do
   action :unlock
 end
-end
