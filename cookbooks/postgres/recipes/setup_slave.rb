@@ -34,7 +34,7 @@ if ['db_slave'].include?(node[:instance_role])
 
   remote_file "#{postgres_root}/#{postgres_version}/recovery.conf" do
     source "recovery.conf"
-    woner "postgres"
+    owner "postgres"
     group "postgres"
     mode 0600
     backup 0
