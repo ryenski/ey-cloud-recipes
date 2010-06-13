@@ -3,9 +3,10 @@ postgres_root    = '/db/postgresql'
 
 require_recipe 'postgres::server_setup'
 require_recipe 'postgres::server_configure'
-
-execute "rc-update add postgresql-#{postgres_version} default" do
-  action :run
+if ['solo', 'db_master'].include?(node[:instance_role])
+  execute "rc-update add postgresql-#{postgres_version} default" do
+    action :run
+  end
 end
 
 remote_file "/etc/conf.d/postgresql-8.3" do
