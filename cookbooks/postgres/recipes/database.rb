@@ -1,5 +1,16 @@
 # Setup database.yml
 dbtype = 'postgresql'
+template "root/.pgpass" do
+  backup 0
+  mode 0600
+  owner 'root'
+  group 'root'
+  source 'pgpass.erb'
+  variables({
+    :dbpass => node.engineyard.environment.ssh_password
+  })
+end
+
 if ['solo', 'app', 'app_master', 'util'].include?(node[:instance_role])
 node.engineyard.apps.each do |app|
 
