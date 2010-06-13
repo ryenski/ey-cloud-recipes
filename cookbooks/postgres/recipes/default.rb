@@ -1,5 +1,5 @@
 require_recipe 'postgres::client'
-
+require_recipe 'postgres::pgpass'
 if ['solo', 'db_master'].include?(node[:instance_role])
   require_recipe 'postgres::server'
   require_recipe 'postgres::eybackup'
