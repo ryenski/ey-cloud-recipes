@@ -1,5 +1,5 @@
 if ['solo', 'db_master', 'db_slave'].include?(node[:instance_role])
-  template "root/.pgpass" do
+  template "/root/.pgpass" do
     backup 0
     mode 0600
     owner 'root'
