@@ -29,6 +29,13 @@ if ['solo', 'db_master'].include?(node[:instance_role])
     only_if "[ ! -d #{postgres_root}/#{postgres_version}/data ]"
   end
 
+  directory "/db/postgresql/8.3/bin" do
+    action :create
+    owner "postgres"
+    group "postgres"
+    mode 0755
+  end
+
   remote_file "/db/postgresql/8.3/bin/update_archive_command" do
     owner "postgres"
     group "postgres"
