@@ -87,3 +87,8 @@ template "/var/lib/postgresql/.ssh/authorized_keys" do
     :key => node[:internal_ssh_public_key]
   })
 end
+
+user "postgres" do
+  action :unlock
+end
+end
