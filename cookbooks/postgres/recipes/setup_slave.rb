@@ -46,7 +46,7 @@ if ['db_slave'].include?(node[:instance_role])
   end
 
   execute "start_rsync" do
-    command "su -c 'cd /db/postgresql/8.3;rsync -avPz --exclude .svn --exclude recovery.conf --exclude postgresql.conf --exclude pg_xlog #{node.engineyard.environment.db_host}:/db/postgresql/8.3/data/ /db/postgresql/8.3/data/' - postgres"
+    command "su -c 'cd /db/postgresql/8.3;rsync -avPz --exclude .svn --exclude recovery.conf --exclude pg_xlog #{node.engineyard.environment.db_host}:/db/postgresql/8.3/data/ /db/postgresql/8.3/data/' - postgres"
     only_if { FileTest.exists?("/db/resync") }
   end
 
