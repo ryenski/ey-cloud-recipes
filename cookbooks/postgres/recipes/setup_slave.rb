@@ -45,7 +45,7 @@ if ['db_slave'].include?(node[:instance_role])
   end
 
   execute "update_archive_command" do
-    command "su -c 'ssh postgres@#{node.engineyard.environment.db_host} /db/postgresql/8.3/bin/update_archive_command #{node.engineyard.environment.db_slaves_hostnames}"
+    command "ssh postgres@#{node.engineyard.environment.db_host} /db/postgresql/8.3/bin/update_archive_command #{node.engineyard.environment.db_slaves_hostnames}"
     only_if { FileTest.exists?("/db/resync") }
 
   end
