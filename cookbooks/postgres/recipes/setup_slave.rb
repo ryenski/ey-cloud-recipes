@@ -14,16 +14,11 @@ if ['db_slave'].include?(node[:instance_role])
     mode "0700"
   end
 
-  ruby_block "do_resync" do
-    if FileTest.directory?("/db/postgresql/8.3/data") || FileTest.exists?("/db/postgresql/8.3/.resync")
-      resync=true
-    end
-  end
-
   execute "do_rsync?" do
     command "touch /db/resync"
     only_if { ! FileTest.directory?("/db/postgresql/8.3/data") }
   end
+
   execute "touch_000001_history" do
     command "touch /db/postgresql/8.3/wal/00000001.history && chown postgres:postgres /db/postgresql/8.3/wal/00000001.history"
     only_if { FileTest.exists?("/db/resync") }
