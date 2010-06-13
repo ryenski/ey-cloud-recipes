@@ -22,6 +22,15 @@ directory '/db/postgresql' do
 end
 
 if ['solo', 'db_master'].include?(node[:instance_role])
+  directory '/db/postgresql/8.3' do
+    owner 'postgres'
+    group 'postgres'
+    mode '0755'
+    action :create
+    recursive true
+  end
+end
+if ['solo', 'db_master'].include?(node[:instance_role])
   execute "init-postgres" do
     command "initdb -D #{postgres_root}/#{postgres_version}/data --encoding=UTF8 --locale=en_US.UTF-8"
       action :run
