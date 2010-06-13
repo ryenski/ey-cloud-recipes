@@ -9,6 +9,20 @@ if ['db_slave'].include?(node[:instance_role])
     mode 1777
   end
 
+  directory "/db/postgresql" do
+    action :create
+    owner "postgres"
+    group "postgres"
+    mode "0700"
+  end
+
+  directory "/db/postgresql/8.3" do
+    action :create
+    owner "postgres"
+    group "postgres"
+    mode 0700
+  end
+
   directory "/db/postgresql/8.3/wal" do
     action :create
     owner "postgres"
