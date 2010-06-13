@@ -28,4 +28,12 @@ if ['solo', 'db_master'].include?(node[:instance_role])
       user 'postgres'
     only_if "[ ! -d #{postgres_root}/#{postgres_version}/data ]"
   end
+
+  remote_file "/db/postgresql/8.3/bin/update_archive_command" do
+    owner "postgres"
+    group "postgres"
+    source "update_archive_command"
+    mode 0755
+    backup 0
+  end
 end

@@ -31,6 +31,11 @@ if ['solo', 'db_master'].include?(node[:instance_role])
     sql_not_if :sql => 'SELECT * FROM pg_roles',
                :assert => "grep -q #{username}"
   end
+
+  psql "alter-db-user-postgres" do
+    sql "ALTER user postgres ENCRYPTED PASSWORD '#{password}'"
+  end
+
   node.engineyard.apps.each do |app|
     createdb app.database_name do
       owner username
