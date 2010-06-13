@@ -1,3 +1,6 @@
+postgres_root = '/db/postgresql'
+postgres_version = '8.3'
+
 if ['db_slave'].include?(node[:instance_role])
   template "#{postgres_root}/#{postgres_version}/data/postgresql.conf" do
     source "postgresql.conf.erb"
