@@ -21,20 +21,19 @@ if ['solo', 'db_master'].include?(node[:instance_role])
       action :run
     not_if "/etc/init.d/postgresql-#{postgres_version} status | grep -q start"
   end
-end
 
-username = node.engineyard.ssh_username
-password = node.engineyard.ssh_password
+  username = node.engineyard.ssh_username
+  password = node.engineyard.ssh_password
 
-psql "create-db-user-#{username}" do
-  sql "create user #{username} with encrypted password '#{password}'"
-  sql_not_if :sql => 'SELECT * FROM pg_roles',
-             :assert => "grep -q #{username}"
-end
-
-node.engineyard.apps.each do |app|
-  createdb app.database_name do
-    owner username
+  psql "create-db-user-#{username}" do
+    sql "create user #{username} with encrypted password '#{password}'"
+    sql_not_if :sql => 'SELECT * FROM pg_roles',
+               :assert => "grep -q #{username}"
+  end
+  node.engineyard.apps.each do |app|
+    createdb app.database_name do
+      owner username
+    end
   end
 end
 
