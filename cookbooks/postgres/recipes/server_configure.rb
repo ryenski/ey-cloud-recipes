@@ -5,7 +5,8 @@ if ['solo', 'db_master'].include?(node[:instance_role])
   template "#{postgres_root}/#{postgres_version}/data/postgresql.conf" do
     source "postgresql.conf.erb"
     owner "postgres"
-    group "root"
+    group "postgres"
+    backup 0
     mode 0600
 
     variables(

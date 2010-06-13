@@ -14,6 +14,7 @@ remote_file "/etc/conf.d/postgresql-8.3" do
   owner "root"
   group "root"
   mode "0644"
+  backup 0
 end
 
 if ['solo', 'db_master'].include?(node[:instance_role])
