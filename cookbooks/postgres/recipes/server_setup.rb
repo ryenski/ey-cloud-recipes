@@ -21,21 +21,11 @@ directory '/db/postgresql' do
   recursive true
 end
 
-directory postgres_root do
-  action :nothing
-  recursive true
-
-  subscribes :delete, resources(:directory => '/db/postgresql'), :immediately
-end
-
-link "setup-postgresq-db-my-symlink" do
-  to '/db/postgresql'
-  target_file postgres_root
-end
-
-execute "init-postgres" do
-  command "initdb -D #{postgres_root}/#{postgres_version}/data --encoding=UTF8 --locale=en_US.UTF-8"
-  action :run
-  user 'postgres'
-  only_if "[ ! -d #{postgres_root}/#{postgres_version}/data ]"
+if ['solo', 'db_master'].include?(node[:instance_role])
+  execute "init-postgres" do
+    command "initdb -D #{postgres_root}/#{postgres_version}/data --encoding=UTF8 --locale=en_US.UTF-8"
+      action :run
+      user 'postgres'
+    only_if "[ ! -d #{postgres_root}/#{postgres_version}/data ]"
+  end
 end
