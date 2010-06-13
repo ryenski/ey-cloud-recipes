@@ -40,7 +40,8 @@ if ['solo', 'db_master'].include?(node[:instance_role])
 
   template "#{postgres_root}/#{postgres_version}/data/pg_hba.conf" do
     owner 'postgres'
-    group 'root'
+    group 'postgres'
+    backup 0
     mode 0600
     source "pg_hba.conf.erb"
     variables({
