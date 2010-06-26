@@ -7,7 +7,7 @@ if ['util'].include?(node[:instance_role])
 
 execute "install_redis_1.3.7_pre1" do
   command "ACCEPT_KEYWORDS=\"~amd64 ~x86\" emerge -v dev-db/redis"
-  not_if { FileTest.exiss?("/usr/bin/redis-server") }
+  not_if { FileTest.exists?("/usr/bin/redis-server") }
 end
 
 directory "/data/redis" do
