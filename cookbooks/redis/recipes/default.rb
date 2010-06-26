@@ -44,6 +44,5 @@ template "/data/monit.d/redis_util.monitrc" do
     :logfile => '/data/redis',
     :port => '6379',
   })
-  notifies :run, resources(:execute => "restart-monit")
 end
 end
