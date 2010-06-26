@@ -29,7 +29,6 @@ template "/etc/redis_util.conf" do
     :port  => '6379',
     :loglevel => 'notice',
     :timeout => 3000,
-    :sharedobjects => 'no'
   })
 end
 
@@ -39,6 +38,7 @@ template "/data/monit.d/redis_util.monitrc" do
   mode 0644
   source "redis.monitrc.erb"
   variables({
+    :profile => '1',
     :configfile => '/etc/redis_util.conf',
     :pidfile => '/var/run/redis_util.pid',
     :logfile => '/data/redis',
