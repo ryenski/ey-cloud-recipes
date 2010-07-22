@@ -5,13 +5,9 @@
 
 if ['util'].include?(node[:instance_role])
 
-enable_package "dev-db/redis" do
-  version "1.3.12_pre1"
-end
-
-package "dev-db/redis" do
-  version "1.3.12_pre1"
-  action :install
+execute "install_redis_1.3.7_pre1" do
+  command "ACCEPT_KEYWORDS=\"~amd64 ~x86\" emerge -v dev-db/redis"
+  not_if { FileTest.exists?("/usr/bin/redis-server") }
 end
 
 directory "/data/redis" do
@@ -32,7 +28,7 @@ template "/etc/redis_util.conf" do
     :logfile => '/data/redis/redis.log',
     :port  => '6379',
     :loglevel => 'notice',
-    :timeout => 300000,
+    :timeout => 3000,
   })
 end
 
@@ -48,9 +44,5 @@ template "/data/monit.d/redis_util.monitrc" do
     :logfile => '/data/redis',
     :port => '6379',
   })
-end
-
-execute "monit reload" do
-  action :run
 end
 end

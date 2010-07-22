@@ -1,10 +1,10 @@
 # Copyright 2009, Engine Yard, Inc.
 #
-# All rights reserved - Do Not Redistribute
+# All rights reserved 
 
-domainlist local_domains = @
+domainlist local_domains = 
 domainlist relay_to_domains =
-hostlist   relay_from_hosts = 127.0.0.1
+hostlist   relay_from_hosts = 127.0.0.1 : localhost : 10.0.0.0/8
 primary_hostname = <%= @p[:my_hostname] %>
 
 acl_smtp_rcpt = acl_check_rcpt
@@ -68,7 +68,7 @@ begin routers
 
 send_via_smarthost:
  driver = manualroute
- domains = ! +local_domains
+ domains = +local_domains
  transport = smarthost_smtp
  route_list = "* <%= @p[:smtp_host] %> byname"
  host_find_failed = defer
@@ -77,7 +77,7 @@ send_via_smarthost:
 
 dnslookup:
  driver = dnslookup
- domains = ! +local_domains
+ domains = +local_domains
  transport = remote_smtp
  ignore_target_hosts = 0.0.0.0 : 127.0.0.0/8
  no_more

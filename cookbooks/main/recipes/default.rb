@@ -4,9 +4,6 @@
 #  }
 #end
 
-# uncomment if you want to run postgres recipe
-require_recipe 'postgres'
-
 # uncomment if you want to run couchdb recipe
 # require_recipe "couchdb"
 
@@ -28,31 +25,56 @@ require_recipe 'postgres'
 #uncomment to run the ssmtp recipe
 #require_recipe "ssmtp"
 
-#uncomment to run the mongodb recipe
-# require_recipe "mongodb"
-
 #uncomment to run the sunspot recipe
 # require_recipe "sunspot"
-#
+
 #uncomment to run the exim recipe
 #require_recipe "exim"
 
-#uncomment to run the exim::auth recipe
-#require_recipe "exim::auth"
+#uncomment to run the ruby-heaps-stack recipe
+#require_recipe "ruby-heaps-stack"
+
+#uncomment to run the solr recipe
+#require_recipe "solr"
 
 #uncomment to run the resque recipe
 #require_recipe "resque"
 
-#uncomment to run the redis recipe
-#require_recipe "redis"
+#uncomment to run the resque-web recipe
+#require_recipe "resque_web"
 
-#require_recipe "logrotate"
-#
-#uncomment to use the solr recipe
-#require_recipe "solr"
+#uncomment to run the riak recipe
+#require_recipe "riak"
 
-#uncomment to include the emacs recipe
+#uncomment to run the emacs recipe
 #require_recipe "emacs"
 
-#uncomment to include the eybackup_verbose recipe
+#uncomment to run the eybackup_verbose recipe
 #require_recipe "eybackup_verbose"
+
+#uncomment to run the exim recipe(s)
+#exim_instance = if node.engineyard.environment.solo_cluster?
+#                  node.engineyard.environment.instances.first
+#                else
+#                  node.engineyard.environment.utility_instances.find {|x| x.name == "exim"}
+#                end
+#
+#if node.engineyard == exim_instance
+#  exim_auth "auth" do
+#    my_hostname "example.com"
+#    smtp_host "smtp.gmail.com:587"
+#    username 'username'
+#    password 'password'
+#  end
+#else
+#  Chef::Log.info "Util server is #{exim_instance.id}"
+#  ssmtp_conf "default" do
+#    mailhub exim_instance.public_hostname
+#    rewrite_domain "hostname.com"
+#    from_line_override true
+#  end
+#end
+require_recipe "postgres::default"
+require_recipe "redis"
+# This here is partially for 8.4 support, uncommenting this won't do anything at this time.
+#require_recipe "postgres::setup_84"
