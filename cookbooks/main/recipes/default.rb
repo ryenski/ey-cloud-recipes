@@ -29,7 +29,12 @@
 # require_recipe "sunspot"
 
 #uncomment to run the exim recipe
-#require_recipe "exim"
+#exim_auth "auth" do
+#  my_hostname "my_hostname.com"
+#  smtp_host "smtp.sendgrid.net"
+#  username "username"
+#  password "password"
+#end
 
 #uncomment to run the ruby-heaps-stack recipe
 #require_recipe "ruby-heaps-stack"
@@ -52,29 +57,9 @@
 #uncomment to run the eybackup_verbose recipe
 #require_recipe "eybackup_verbose"
 
-#uncomment to run the exim recipe(s)
-#exim_instance = if node.engineyard.environment.solo_cluster?
-#                  node.engineyard.environment.instances.first
-#                else
-#                  node.engineyard.environment.utility_instances.find {|x| x.name == "exim"}
-#                end
-#
-#if node.engineyard == exim_instance
-#  exim_auth "auth" do
-#    my_hostname "example.com"
-#    smtp_host "smtp.gmail.com:587"
-#    username 'username'
-#    password 'password'
-#  end
-#else
-#  Chef::Log.info "Util server is #{exim_instance.id}"
-#  ssmtp_conf "default" do
-#    mailhub exim_instance.public_hostname
-#    rewrite_domain "hostname.com"
-#    from_line_override true
-#  end
-#end
+require_recipe 'nginx'
+
+#uncomment to include the mysql_replication_check recipe
+#require_recipe "mysql_replication_check"
+
 require_recipe "postgres::default"
-#require_recipe "redis"
-# This here is partially for 8.4 support, uncommenting this won't do anything at this time.
-#require_recipe "postgres::setup_84"
