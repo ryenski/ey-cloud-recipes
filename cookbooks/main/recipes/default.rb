@@ -33,9 +33,14 @@ require_recipe 'postgres'
 
 #uncomment to run the sunspot recipe
 # require_recipe "sunspot"
-#
+
 #uncomment to run the exim recipe
-#require_recipe "exim"
+#exim_auth "auth" do
+#  my_hostname "my_hostname.com"
+#  smtp_host "smtp.sendgrid.net"
+#  username "username"
+#  password "password"
+#end
 
 #uncomment to run the exim::auth recipe
 #require_recipe "exim::auth"
@@ -56,3 +61,8 @@ require_recipe 'postgres'
 
 #uncomment to include the eybackup_verbose recipe
 #require_recipe "eybackup_verbose"
+
+#require_recipe 'nginx'
+
+#uncomment to include the mysql_replication_check recipe
+#require_recipe "mysql_replication_check"

@@ -5,13 +5,18 @@
 
 if ['util'].include?(node[:instance_role])
 
+execute "set_overcommit_memory" do
+  command "echo 1 > /proc/sys/vm/overcommit_memory"
+  action :run
+end
+
 enable_package "dev-db/redis" do
-  version "1.3.12_pre1"
+  version "2.0.4"
 end
 
 package "dev-db/redis" do
-  version "1.3.12_pre1"
-  action :install
+  version "2.0.4"
+  action :upgrade
 end
 
 directory "/data/redis" do
@@ -19,6 +24,7 @@ directory "/data/redis" do
   group 'redis'
   mode 0755
   recursive true
+  action :create
 end
 
 template "/etc/redis_util.conf" do
