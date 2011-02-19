@@ -63,3 +63,6 @@ require_recipe 'nginx'
 #require_recipe "mysql_replication_check"
 
 require_recipe "postgres::default"
+#uncomment to include the mysql_administrative_tools recipe
+# additional configuration of this recipe is required
+#require_recipe "mysql_administrative_tools"
