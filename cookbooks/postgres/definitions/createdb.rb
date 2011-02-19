@@ -12,7 +12,7 @@ define :createdb, :user => 'postgres' do
 
   psql "grant permissions to #{owner} on #{db_name}" do
     action :nothing
-    sql "grant all on database #{db_name} to #{owner}"
+    sql "grant all on database #{db_name}_production to #{owner}"
 
     subscribes :run, resources(:execute => "createdb-#{db_name}"), :immediately
   end

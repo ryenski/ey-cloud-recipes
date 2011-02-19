@@ -38,9 +38,9 @@ if ['solo', 'db_master'].include?(node[:instance_role])
   end
 
   node.engineyard.apps.each do |app|
-    createdb app.database_name do
-      owner username
-    end
+    # createdb app.database_name do
+    #   owner username
+    # end
   end
 end
 
